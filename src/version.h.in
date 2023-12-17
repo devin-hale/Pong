@@ -1,0 +1,2 @@
+#define Pong_VERSION_MAJOR @Pong_VERSION_MAJOR@
+#define Pong_VERSION_MINOR @Pong_VERSION_MINOR@
