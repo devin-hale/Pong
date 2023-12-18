@@ -17,17 +17,14 @@ int main(int argc, char* argv[]) {
 
     Window* window{new Window{}};
     Renderer* renderer{new Renderer{window->getWindow()}};
-    Game* game{new Game{}};
+    Game* game{new Game{window, renderer}};
 
-    while (game->getRunning()) {
+    while (game->isRunning()) {
         SDL_Event event;
         game->gameLoop(event);
 		renderer->render();
     }
 
-    delete window;
-    delete renderer;
     delete game;
-    SDL_Quit();
     return 0;
 }
