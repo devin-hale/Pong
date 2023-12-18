@@ -17,3 +17,4 @@ void Game::gameLoop(SDL_Event& event) {
             }
         }
     };
+

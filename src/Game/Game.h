@@ -16,7 +16,7 @@ class Game {
 
     void gameLoop(SDL_Event& event);
 
-	void gameExit();
+
 };
 
 #endif
