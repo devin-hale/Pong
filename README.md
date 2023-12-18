@@ -14,8 +14,8 @@ Is currently a black window.
 - [x] Game Class
 
 - [ ] 2D Vector Class
-    - [ ] Coordinates
-    - [ ] Moving Coordinates
+    - [x] Coordinates
+    - [] Moving Coordinates
 - [ ] Paddle Class
     - [ ] Moving Up/Down
     - [ ] Bounds Checking

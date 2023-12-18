@@ -10,6 +10,7 @@
 int main(int argc, char* argv[]) {
     std::cout << "Pong v" << Pong_VERSION_MAJOR << "." << Pong_VERSION_MINOR
               << "\n";
+
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
         std::cout << "Failed to initialize SDL2\n";
         return -1;
