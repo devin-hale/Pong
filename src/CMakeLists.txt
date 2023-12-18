@@ -24,7 +24,6 @@ target_include_directories(${PROJECT_NAME} PRIVATE
 	${PROJECT_SOURCE_DIR}/Game
 	${PROJECT_SOURCE_DIR}/Window
 	${PROJECT_SOURCE_DIR}/Renderer
-	${PROJECT_SOURCE_DIR}/Vec2D
 )
 
 configure_file(version.h.in

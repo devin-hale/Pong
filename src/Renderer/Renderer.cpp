@@ -1,5 +1,4 @@
 #include "Renderer.h"
-
 #include <SDL_render.h>
 
 //Private
@@ -11,16 +10,10 @@ void Renderer::setColor(int r = 0, int g = 0, int b = 0, int a = 0){
 	cc->m_b = b;
 	cc->m_a = a;
 
+	SDL_SetRenderDrawColor(getRenderer(), cc->m_r, cc->m_g, cc->m_b, cc->m_a);
+
 	cc = nullptr;
 }
-
-void Renderer::renderBackGround(){
-	currentColor* cc{getCurrentColor()};	
-	SDL_SetRenderDrawColor(getRenderer(), cc->m_r, cc->m_g, cc->m_b, cc->m_a);
-	cc = nullptr;
-	SDL_RenderClear(getRenderer());
-};
-
 
 //Public
 Renderer::Renderer(SDL_Window* window)
@@ -33,8 +26,17 @@ Renderer::~Renderer(){
 	setCurrentColorNull();
 };
 
+void Renderer::renderBackGround(){
+	setColor();
+	SDL_RenderClear(getRenderer());
+};
+
+void Renderer::drawLine(Vec2D* start, Vec2D* end){
+	setColor(255, 255, 255, 1);
+	SDL_RenderDrawLine(getRenderer(), start->getX(), start->getY(), end->getX(), end->getY());
+};
+
 void Renderer::render(){
-	renderBackGround();
 	SDL_RenderPresent(getRenderer());
 };
 

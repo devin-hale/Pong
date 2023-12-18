@@ -2,6 +2,7 @@
 #define RENDERER_H
 
 #include <SDL.h>
+#include "../Vec2D/Vec2D.h"
 
 struct currentColor {
 	int m_r{0};
@@ -19,7 +20,8 @@ class Renderer {
 
 	void setColor(int r, int g, int b, int a);
 
-	void renderBackGround();
+	void setRenderColor();
+
 
 	void setCurrentColorNull(){m_currentColor = nullptr;};
 
@@ -33,6 +35,10 @@ class Renderer {
     SDL_Renderer* getRenderer() { return m_renderer; };
 
 	currentColor* getCurrentColor() { return m_currentColor;};
+
+	void renderBackGround();
+
+	void drawLine(Vec2D* start, Vec2D* end);
 
 	void render();
 };
