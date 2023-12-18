@@ -1,6 +1,4 @@
 #include "Game.h"
-#include <SDL.h>
-
 
 void Game::gameLoop(SDL_Event& event) {
         while (SDL_PollEvent(&event)) {

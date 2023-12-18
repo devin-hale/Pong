@@ -15,6 +15,8 @@ class Game {
     void setRunning(bool tf) { m_running = tf; };
 
     void gameLoop(SDL_Event& event);
+
+	void gameExit();
 };
 
 #endif

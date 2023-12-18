@@ -1,8 +1,6 @@
 #include "main.h"
 
 #include <SDL.h>
-#include <SDL_render.h>
-#include <SDL_video.h>
 
 #include "Game/Game.h"
 #include "version.h"
@@ -27,8 +25,8 @@ int main(int argc, char* argv[]) {
 
     Game game{};
 
-	SDL_Event event;
     while (game.getRunning()) {
+		SDL_Event event;
         game.gameLoop(event);
 
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
