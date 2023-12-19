@@ -4,7 +4,7 @@ This is a practice project using SDL2 to implement Pong, and practice using CMak
 
 ## Status:
 
-Is currently a black window.
+Currently over-engineering an engine for a pong clone just to experiment and try things out.
 
 ## Roadmap:
 
