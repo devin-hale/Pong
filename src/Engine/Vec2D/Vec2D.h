@@ -13,13 +13,13 @@ class Vec2D {
 
     Vec2D(Vec2D& other);
 
-    Vec2D operator=(Vec2D& other);
+    Vec2D operator=(const Vec2D& other);
 
-    Vec2D operator+(Vec2D& other);
+    Vec2D operator+(const Vec2D& other);
 
-    Vec2D operator-(Vec2D& other);
+    Vec2D operator-(const Vec2D& other);
 
-    Vec2D operator*(Vec2D& other);
+    Vec2D operator*(const Vec2D& other);
 
     int getX() { return m_xPos; };
 

@@ -8,14 +8,17 @@ Is currently a black window.
 
 ## Roadmap:
 
+### Engine:
 - [x] Manhandle CMake to work with Windows without VS or VSC.
 - [x] Window Class
 - [x] Renderer Class
 - [x] Game Class
+- [x] 2D Vector Class
+- [x] Entity Class
 
-- [ ] 2D Vector Class
-    - [x] Coordinates
-    - [] Moving Coordinates
+- [ ] Set up Game class to handle entities, loop through, etc
+
+### Game:
 - [ ] Paddle Class
     - [ ] Moving Up/Down
     - [ ] Bounds Checking
