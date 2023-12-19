@@ -2,10 +2,10 @@
 
 #include <SDL.h>
 
-#include "Game/Game.h"
-#include "Renderer/Renderer.h"
-#include "Vec2D/Vec2D.h"
-#include "Window/Window.h"
+#include "Engine/Game/Game.h"
+#include "Engine/Renderer/Renderer.h"
+#include "Engine/Vec2D/Vec2D.h"
+#include "Engine/Window/Window.h"
 #include "version.h"
 
 int main(int argc, char* argv[]) {
