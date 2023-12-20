@@ -28,6 +28,8 @@ class Vec2D {
     int getY() { return m_yPos; };
 
     void setY(int num) { m_yPos = num; };
+
+    void printVec();
 };
 
 #endif

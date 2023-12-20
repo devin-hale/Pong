@@ -3,6 +3,8 @@
 
 #include "../../Engine/Entity/Entity.h"
 #include "../../Engine/Vec2D/Vec2D.h"
+#include <SDL.h>
+
 
 class Ball : Entity {
 	private:
@@ -14,6 +16,8 @@ class Ball : Entity {
 		//Direction is stored in degrees
 		int m_direction{0};
 
+		void setPosNull();
+
 		int getXVel();
 
 		int getYVel();
@@ -22,6 +26,8 @@ class Ball : Entity {
 		Ball();
 
 		Ball(int velocity);
+
+		Ball(int xPos, int yPos, int velocity = 0);
 
 		Ball(int xPos, int yPos, int width, int height);
 
@@ -37,9 +43,9 @@ class Ball : Entity {
 
 		void setDirection(int newDir){m_direction = newDir;};
 
-		void movePos();	
+		void render(int (*renderPtr)(SDL_Renderer* renderer, int sx, int sy, int ex, int ey), SDL_Renderer* r);
 
-		void render(int (*render)());
+		void movePos();
 
 };
 

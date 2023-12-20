@@ -7,9 +7,10 @@ class Entity {
    private:
     Vec2D* m_Pos{nullptr};
 
-	void deletePos();
+   protected:
+    void deletePos();
 
-	void setPos(Vec2D* vec);
+    void setPos(Vec2D* vec);
 
    public:
     Entity() = delete;

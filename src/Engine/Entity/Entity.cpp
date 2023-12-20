@@ -1,6 +1,9 @@
 #include "Entity.h"
+#include <iostream>
 
 //Private
+
+//Protected
 
 void Entity::deletePos(){
 	delete m_Pos;
@@ -25,7 +28,3 @@ Entity Entity::operator=(const Entity* other){
 	return Entity(other->m_Pos->getX(), other->m_Pos->getY());
 };
 
-void Entity::movePos(int x, int y) {
-	Vec2D* moveVec{ new Vec2D{*getPos() + Vec2D{x,y}}};
-	setPos(moveVec);
-};
