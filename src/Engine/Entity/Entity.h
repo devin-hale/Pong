@@ -5,7 +5,7 @@
 
 class Entity {
    private:
-    Vec2D* m_Pos{};
+    Vec2D* m_Pos{nullptr};
 
 	void deletePos();
 
