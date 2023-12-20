@@ -19,36 +19,29 @@ int main(int argc, char* argv[]) {
         return -1;
     }
 
-	// TODO: Consolidate initialization in Game constructor
+    // TODO: Consolidate initialization in Game constructor
     Window* window{new Window{}};
     Renderer* renderer{new Renderer{window->getWindow()}};
     Game* game{new Game{window, renderer}};
 
-    Vec2D* start{new Vec2D{window->getWidth() / 2, 0}};
-    Vec2D* end{new Vec2D{window->getWidth() / 2, window->getHeight()}};
+    Ball* ball{
+        new Ball{window->getWidth() / 2, window->getHeight() / 2, 25, 25, 3}};
 
-	Ball* ball{new Ball{window->getWidth()/2, window->getHeight()/2 , 25, 25, 2}};
-
-	int (*drawLinePtr)(SDL_Renderer *renderer, int x1, int y1, int x2, int y2){SDL_RenderDrawLine};
-
+    game->addEntity(ball);
 
     while (game->isRunning()) {
         SDL_Event event;
         game->gameLoop(event);
 
-		ball->movePos();
-		ball->setDirection(45);
+        ball->movePos();
+        ball->setDirection(45);
 
         renderer->renderBackGround();
-        renderer->drawLine(start, end);
-
-		ball->render(drawLinePtr, renderer->getRenderer());
+		game->renderEntities();
         renderer->render();
     }
 
-	delete ball;
-    delete start;
-    delete end;
+    delete ball;
     delete game;
     return 0;
 }

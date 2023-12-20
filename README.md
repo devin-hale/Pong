@@ -15,8 +15,7 @@ Currently over-engineering an engine for a pong clone just to experiment and try
 - [x] Game Class
 - [x] 2D Vector Class
 - [x] Entity Class
-
-- [ ] Set up Game class to handle entities, loop through, etc
+- [x] Set up Game class to handle entities, loop through, etc
 
 ### Game:
 - [ ] Paddle Class
@@ -24,8 +23,8 @@ Currently over-engineering an engine for a pong clone just to experiment and try
     - [ ] Bounds Checking
 - [ ] Player Controls
 - [ ] Ball Class
-    - [ ] Movement
-    - [ ] Velocity
+    - [x] Movement
+    - [x] Velocity
     - [ ] Redirection/Bouncing
 - [ ] Collision Checking
 - [ ] Player Class
@@ -34,6 +33,7 @@ Currently over-engineering an engine for a pong clone just to experiment and try
 - [ ] Win Screen
 - [ ] Play Again
 - [ ] Start Screen
+- [ ] Sound Effects
 
 - [ ] Create/Find simple icons
 - [ ] Setup installing through CMake

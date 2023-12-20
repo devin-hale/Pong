@@ -1,10 +1,16 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
+#include <SDL.h>
+
 #include "../Vec2D/Vec2D.h"
 
 class Entity {
+   public:
+    enum EntityType { Blank, Ball };
+
    private:
+    EntityType m_type{Blank};
     Vec2D* m_Pos{nullptr};
 
    protected:
@@ -15,7 +21,7 @@ class Entity {
    public:
     Entity() = delete;
 
-    Entity(int x, int y);
+    Entity(int x, int y, EntityType type);
 
     ~Entity();
 
@@ -26,6 +32,12 @@ class Entity {
     Vec2D* getPos() { return m_Pos; };
 
     void movePos(int x, int y);
+
+    EntityType getType() { return m_type; };
+
+    virtual void render(int (*renderPtr)(SDL_Renderer* renderer, int sx, int sy,
+                                         int ex, int ey),
+                        SDL_Renderer* r);
 };
 
 #endif

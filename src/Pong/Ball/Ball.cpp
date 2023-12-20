@@ -3,10 +3,8 @@
 #include <math.h>
 
 #include <cmath>
-#include <thread>
-
-#include "SDL_render.h"
 #include <iostream>
+#include <thread>
 
 constexpr double pi = 3.14;
 
@@ -34,7 +32,8 @@ int Ball::getXVel() {
 };
 
 int Ball::getYVel() {
-    double angle{static_cast<double>(getDirection() == 0 ? 360 : getDirection())};
+    double angle{
+        static_cast<double>(getDirection() == 0 ? 360 : getDirection())};
     double radians{(angle * pi) / 180};
     double yVel = sin(radians) * getVel();
     return round(yVel);
@@ -42,33 +41,36 @@ int Ball::getYVel() {
 
 // Public
 // TODO: Get rid of magic number 20 on constructors
-Ball::Ball() : Entity(0, 0) {
+
+Ball::Ball() : Entity{0, 0, EntityType::Ball} {
     m_bR = new Vec2D{getPos()->getX() + 20, getPos()->getY()};
     m_tL = new Vec2D{getPos()->getX(), getPos()->getY() - 20};
     m_tR = new Vec2D{getPos()->getX() + 20, getPos()->getY() - 20};
 };
 
-Ball::Ball(int velocity) : Entity(0, 0), m_velocity{velocity} {
+Ball::Ball(int velocity)
+    : Entity(0, 0, EntityType::Ball), m_velocity{velocity} {
     m_bR = new Vec2D{getPos()->getX() + 20, getPos()->getY()};
     m_tL = new Vec2D{getPos()->getX(), getPos()->getY() - 20};
     m_tR = new Vec2D{getPos()->getX() + 20, getPos()->getY() - 20};
 }
 
 Ball::Ball(int xPos, int yPos, int velocity)
-    : Entity{xPos, yPos}, m_velocity{0} {
+    : Entity{xPos, yPos, Entity::Ball}, m_velocity{0} {
     m_bR = new Vec2D{getPos()->getX() + 20, getPos()->getY()};
     m_tL = new Vec2D{getPos()->getX(), getPos()->getY() - 20};
     m_tR = new Vec2D{getPos()->getX() + 20, getPos()->getY() - 20};
 };
 
-Ball::Ball(int xPos, int yPos, int width, int height) : Entity(xPos, yPos) {
+Ball::Ball(int xPos, int yPos, int width, int height)
+    : Entity(xPos, yPos, EntityType::Ball) {
     m_bR = new Vec2D{getPos()->getX() + width, getPos()->getY()};
     m_tL = new Vec2D{getPos()->getX(), getPos()->getY() - height};
     m_tR = new Vec2D{getPos()->getX() + width, getPos()->getY() - height};
 };
 
 Ball::Ball(int xPos, int yPos, int width, int height, int velocity)
-    : Entity(xPos, yPos), m_velocity{velocity} {
+    : Entity(xPos, yPos, EntityType::Ball), m_velocity{velocity} {
     m_bR = new Vec2D{getPos()->getX() + width, getPos()->getY()};
     m_tL = new Vec2D{getPos()->getX(), getPos()->getY() - height};
     m_tR = new Vec2D{getPos()->getX() + width, getPos()->getY() - height};
@@ -104,8 +106,8 @@ void Ball::movePos() {
     m_tR = newTR;
 };
 
-void Ball::render(int (*renderPtr)(SDL_Renderer* renderer, int sx, int sy,
-                                   int ex, int ey),
+void Ball::render(int (*renderPtr)(SDL_Renderer* renderer, int x1, int y1,
+                                   int x2, int y2),
                   SDL_Renderer* r) {
     // BL to BR
     renderPtr(r, getPos()->getX(), getPos()->getY(), m_bR->getX(),

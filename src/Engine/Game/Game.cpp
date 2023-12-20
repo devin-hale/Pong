@@ -1,5 +1,7 @@
 #include "Game.h"
 
+#include <iostream>
+
 // Private
 void Game::exitGame() {
     setIsRunning(false);
@@ -35,4 +37,20 @@ void Game::gameLoop(SDL_Event& event) {
             }
         }
     }
+};
+
+void Game::addEntity(Entity* ent) { m_entities.push_back(ent); };
+
+void Game::renderEntities() {
+	m_renderer->setColor(255,255,255,0);
+    for (Entity* ent : m_entities) {
+        switch (ent->getType()) {
+            case Entity::EntityType::Blank:
+                break;
+            case Entity::EntityType::Ball:
+                ent->render(m_renderer->m_drawLinePtr,
+                            m_renderer->getRenderer());
+                break;
+        };
+    };
 };
