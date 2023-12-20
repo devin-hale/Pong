@@ -47,6 +47,7 @@ void Game::renderEntities() {
         switch (ent->getType()) {
             case Entity::EntityType::Blank:
                 break;
+			case Entity::EntityType::Net:
             case Entity::EntityType::Ball:
                 ent->render(m_renderer->m_drawLinePtr,
                             m_renderer->getRenderer());

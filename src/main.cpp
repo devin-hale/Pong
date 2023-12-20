@@ -5,9 +5,9 @@
 
 #include "Engine/Game/Game.h"
 #include "Engine/Renderer/Renderer.h"
-#include "Engine/Vec2D/Vec2D.h"
 #include "Engine/Window/Window.h"
 #include "Pong/Ball/Ball.h"
+#include "Pong/Net/Net.h"
 #include "version.h"
 
 int main(int argc, char* argv[]) {
@@ -24,10 +24,12 @@ int main(int argc, char* argv[]) {
     Renderer* renderer{new Renderer{window->getWindow()}};
     Game* game{new Game{window, renderer}};
 
+	Net* net{new Net(window->getWidth(), window->getHeight())};
     Ball* ball{
         new Ball{window->getWidth() / 2, window->getHeight() / 2, 25, 25, 3}};
 
     game->addEntity(ball);
+	game->addEntity(net);
 
     while (game->isRunning()) {
         SDL_Event event;
@@ -37,7 +39,7 @@ int main(int argc, char* argv[]) {
         ball->setDirection(45);
 
         renderer->renderBackGround();
-		game->renderEntities();
+        game->renderEntities();
         renderer->render();
     }
 
