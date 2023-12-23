@@ -38,6 +38,7 @@ class Entity {
     virtual void render(int (*renderPtr)(SDL_Renderer* renderer, int sx, int sy,
                                          int ex, int ey),
                         SDL_Renderer* r);
+
 };
 
 #endif

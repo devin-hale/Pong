@@ -30,13 +30,14 @@ int main(int argc, char* argv[]) {
 
     game->addEntity(ball);
 	game->addEntity(net);
+    ball->setDirection(45);
 
     while (game->isRunning()) {
         SDL_Event event;
         game->gameLoop(event);
 
-        ball->movePos();
-        ball->setDirection(45);
+        ball->movePos(window->getWidth(), window->getHeight());
+		ball->setVel(5);
 
         renderer->renderBackGround();
         game->renderEntities();

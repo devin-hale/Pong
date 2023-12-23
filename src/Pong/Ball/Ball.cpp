@@ -86,18 +86,39 @@ Ball::~Ball() {
     m_tR = nullptr;
 };
 
-void Ball::movePos() {
+void Ball::movePos(int maxW, int maxH) {
     using namespace std::chrono_literals;
 
-    Vec2D vecMove{getXVel(), getYVel()};
+    handleXCollide(maxW);
+    handleYCollide(maxH);
+
+    int xVel{getXVel()};
+    int yVel{getYVel()};
+
+    Vec2D vecMove{xVel, yVel};
+
+    if (vecMove.getX() + getPos()->getX() < 0) {
+        vecMove.setX(getPos()->getX() * -1);
+    }
+    if (vecMove.getX() + getPos()->getX() > maxW) {
+        vecMove.setX((getPos()->getX() - maxW) * -1);
+    }
+    if (vecMove.getY() + getPos()->getY() < 0) {
+        vecMove.setY(getPos()->getY() * -1);
+    }
+    if (vecMove.getY() + getPos()->getY() > maxH) {
+        vecMove.setY((getPos()->getY() - maxH) * -1);
+    }
 
     Vec2D* newBL{new Vec2D{*getPos() + vecMove}};
+
     Vec2D* newBR{new Vec2D{*m_bR + vecMove}};
+
     Vec2D* newTL{new Vec2D{*m_tL + vecMove}};
     Vec2D* newTR{new Vec2D{*m_tR + vecMove}};
 
     // TODO find a different way to set pace
-    std::this_thread::sleep_for(50ms);
+    std::this_thread::sleep_for(10ms);
 
     setPosNull();
     setPos(newBL);
@@ -119,4 +140,31 @@ void Ball::render(int (*renderPtr)(SDL_Renderer* renderer, int x1, int y1,
     // TL to BL
     renderPtr(r, m_tL->getX(), m_tL->getY(), getPos()->getX(),
               getPos()->getY());
+};
+
+void Ball::handleXCollide(int maxW) {
+    if (getPos()->getX() <= 0 || m_bR->getX() >= maxW) {
+        m_direction = (m_direction + 270) % 360;
+    }
+};
+
+void Ball::handleYCollide(int maxH) {
+    if (getPos()->getY() <= 0 || m_bR->getY() >= maxH) {
+        m_direction = m_direction * -1;
+    }
+};
+
+void Ball::handleVCollide(Vec2D* vec, int maxW, int maxH) {
+    if (vec->getX() < 0) {
+        vec->setX(0);
+    }
+    if (vec->getX() > maxW) {
+        vec->setX(maxW);
+    }
+    if (vec->getY() < 0) {
+        vec->setY(0);
+    }
+    if (vec->getY() > maxH) {
+        vec->setY(maxH);
+    }
 };

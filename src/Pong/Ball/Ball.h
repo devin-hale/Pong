@@ -45,7 +45,14 @@ class Ball : public Entity {
                                  int y2),
                 SDL_Renderer* r) override;
 
-    void movePos();
+    void handleXCollide(int maxW);
+
+	void handleYCollide(int maxH);
+
+    void movePos(int maxW, int maxH);
+
+	void handleVCollide(Vec2D* vec, int maxW, int maxH);
+
 };
 
 #endif
