@@ -143,10 +143,39 @@ void Ball::render(int (*renderPtr)(SDL_Renderer* renderer, int x1, int y1,
 };
 
 void Ball::handleXCollide(int maxW) {
-    if (getPos()->getX() <= 0 || m_bR->getX() >= maxW) {
-        m_direction = (m_direction + 270) % 360;
+    int x = getPos()->getX();
+    int y = getPos()->getY();
+    int xVel = getXVel();
+    int yVel = getYVel();
+
+    // Check for left wall collision
+    if (x <= 0 && xVel < 0) {
+        if (yVel > 0) {
+            // Ball is moving downward, adjust the direction
+            m_direction = (m_direction + 270) % 360;
+        } else if (yVel < 0) {
+            // Ball is moving upward, adjust the direction
+            m_direction = (m_direction + 90) % 360;
+        } else {
+            // Ball is moving horizontally, reverse x direction
+            m_direction = (180 - m_direction) % 360;
+        }
     }
-};
+
+    // Check for right wall collision
+    if (x >= maxW && xVel > 0) {
+        if (yVel > 0) {
+            // Ball is moving downward, adjust the direction
+            m_direction = (m_direction + 90) % 360;
+        } else if (yVel < 0) {
+            // Ball is moving upward, adjust the direction
+            m_direction = (m_direction + 270) % 360;
+        } else {
+            // Ball is moving horizontally, reverse x direction
+            m_direction = (180 - m_direction) % 360;
+        }
+    }
+}
 
 void Ball::handleYCollide(int maxH) {
     if (getPos()->getY() <= 0 || m_bR->getY() >= maxH) {
