@@ -8,6 +8,7 @@ class Net : public Entity {
    private:
     // Top point is the original m_Pos from the Entity class
     Vec2D* m_bot{nullptr};
+	bool m_isCollision{false};
 
     void setPosNull();
 

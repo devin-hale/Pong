@@ -1,10 +1,10 @@
-#ifndef BALL_H
-#define BALL_H
+#ifndef PADDLE_H
+#define PADDLE_H
 
 #include "../../Engine/Entity/Entity.h"
 #include "../../Engine/Vec2D/Vec2D.h"
 
-class Ball : public Entity {
+class Paddle : public Entity {
    private:
     // Bottom left point is the original m_Pos from the Entity class
     Vec2D* m_bR{nullptr};
@@ -14,6 +14,7 @@ class Ball : public Entity {
     // Direction is stored in degrees
     int m_direction{0};
 	bool m_isCollision{true};
+	bool m_isPlayer{false};
 
     void setPosNull();
 
@@ -22,17 +23,9 @@ class Ball : public Entity {
     int getYVel();
 
    public:
-    Ball();
-
-    Ball(int velocity);
-
-    Ball(int xPos, int yPos, int velocity = 0);
-
-    Ball(int xPos, int yPos, int width, int height);
-
-    Ball(int xPos, int yPos, int width, int height, int velocity);
-
-    ~Ball();
+    Paddle(bool isPlayer, int maxW, int maxH);
+    
+    ~Paddle();
 
     int getVel() { return m_velocity; };
 
@@ -46,14 +39,7 @@ class Ball : public Entity {
                                  int y2),
                 SDL_Renderer* r) override;
 
-    void handleXCollide(int maxW);
-
-	void handleYCollide(int maxH);
-
     void movePos(int maxW, int maxH);
-
-	void handleVCollide(Vec2D* vec, int maxW, int maxH);
-
 };
 
 #endif

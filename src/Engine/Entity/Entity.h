@@ -7,7 +7,7 @@
 
 class Entity {
    public:
-    enum EntityType { Blank, Ball, Net };
+    enum EntityType { Blank, Ball, Net, Paddle };
 
    private:
     EntityType m_type{Blank};

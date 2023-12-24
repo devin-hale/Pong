@@ -8,6 +8,7 @@
 #include "Engine/Window/Window.h"
 #include "Pong/Ball/Ball.h"
 #include "Pong/Net/Net.h"
+#include "Pong/Paddle/Paddle.h"
 #include "version.h"
 
 int main(int argc, char* argv[]) {
@@ -27,7 +28,11 @@ int main(int argc, char* argv[]) {
 	Net* net{new Net(window->getWidth(), window->getHeight())};
     Ball* ball{
         new Ball{window->getWidth() / 2, window->getHeight() / 2, 25, 25, 3}};
+	Paddle* playerPaddle{new Paddle{true, window->getWidth(), window->getHeight()}};
+	Paddle* cpuPaddle{new Paddle{false, window->getWidth(), window->getHeight()}};
 
+	game->addEntity(playerPaddle);
+	game->addEntity(cpuPaddle);
     game->addEntity(ball);
 	game->addEntity(net);
     ball->setDirection(45);
