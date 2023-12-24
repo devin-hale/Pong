@@ -31,6 +31,7 @@ int main(int argc, char* argv[]) {
 	Paddle* playerPaddle{new Paddle{true, window->getWidth(), window->getHeight()}};
 	Paddle* cpuPaddle{new Paddle{false, window->getWidth(), window->getHeight()}};
 
+	game->addPlayerEntity(playerPaddle);
 	game->addEntity(playerPaddle);
 	game->addEntity(cpuPaddle);
     game->addEntity(ball);
@@ -41,7 +42,7 @@ int main(int argc, char* argv[]) {
         SDL_Event event;
         game->gameLoop(event);
 
-        ball->movePos(window->getWidth(), window->getHeight());
+        ball->movePos(window->getWidth(), window->getHeight(), playerPaddle, cpuPaddle);
 		ball->setVel(5);
 
         renderer->renderBackGround();
@@ -49,7 +50,6 @@ int main(int argc, char* argv[]) {
         renderer->render();
     }
 
-    delete ball;
     delete game;
     return 0;
 }

@@ -15,6 +15,7 @@ class Game {
     Window* m_window{nullptr};
     Renderer* m_renderer{nullptr};
     std::vector<Entity*> m_entities{};
+    Entity* m_playerEntity{nullptr};
 
     void setIsRunning(bool boolean) { m_isRunning = boolean; };
 
@@ -31,9 +32,13 @@ class Game {
 
     void gameLoop(SDL_Event& event);
 
-	void addEntity(Entity* ent);
+    void addEntity(Entity* ent);
 
-	void renderEntities();
+    void addPlayerEntity(Entity* ent) { m_playerEntity = ent; };
+
+    void renderEntities();
+
+	void checkCollision();
 };
 
 #endif

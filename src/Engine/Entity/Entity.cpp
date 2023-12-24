@@ -36,5 +36,11 @@ void Entity::movePos(int x, int y) {
     setPos(moveVec);
 };
 
-void Entity::render(int (*renderPtr)(SDL_Renderer* renderer, int sx, int sy, int ex, int ey), SDL_Renderer* r){};
+void Entity::move(int maxW, int maxH){};
+void Entity::setDirection(int angle){};
+void Entity::setVel(int vel){};
+void Entity::handlePaddleCollide(class Paddle* paddle){};
 
+void Entity::render(int (*renderPtr)(SDL_Renderer* renderer, int sx, int sy,
+                                     int ex, int ey),
+                    SDL_Renderer* r){};

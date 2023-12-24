@@ -13,8 +13,8 @@ class Paddle : public Entity {
     int m_velocity{0};
     // Direction is stored in degrees
     int m_direction{0};
-	bool m_isCollision{true};
-	bool m_isPlayer{false};
+    bool m_isCollision{true};
+    bool m_isPlayer{false};
 
     void setPosNull();
 
@@ -24,22 +24,26 @@ class Paddle : public Entity {
 
    public:
     Paddle(bool isPlayer, int maxW, int maxH);
-    
+
     ~Paddle();
 
     int getVel() { return m_velocity; };
 
-    void setVel(int vel) { m_velocity = vel; };
+    Vec2D* getBR() { return m_bR; };
+    Vec2D* getTL() { return m_tL; };
+    Vec2D* getTR() { return m_tR; };
+
+    virtual void setVel(int vel) override { m_velocity = vel; };
 
     int getDirection() { return m_direction; };
 
-    void setDirection(int newDir) { m_direction = newDir; };
+    virtual void setDirection(int newDir) override { m_direction = newDir; };
 
     void render(int (*renderPtr)(SDL_Renderer* renderer, int x1, int y1, int x2,
                                  int y2),
                 SDL_Renderer* r) override;
 
-    void movePos(int maxW, int maxH);
+    void move(int maxW, int maxH) override;
 };
 
 #endif

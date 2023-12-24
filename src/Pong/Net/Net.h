@@ -15,6 +15,8 @@ class Net : public Entity {
    public:
 	Net(int winWidth, int winHeigth);
 
+	~Net();
+
     void render(int (*renderPtr)(SDL_Renderer* renderer, int x1, int y1, int x2,
                                  int y2),
                 SDL_Renderer* r) override;

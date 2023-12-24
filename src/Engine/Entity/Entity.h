@@ -33,11 +33,19 @@ class Entity {
 
     void movePos(int x, int y);
 
+	virtual void move(int maxW, int maxH);
+
+	virtual void setDirection(int angle);
+
+	virtual void setVel(int vel);
+
     EntityType getType() { return m_type; };
 
     virtual void render(int (*renderPtr)(SDL_Renderer* renderer, int sx, int sy,
                                          int ex, int ey),
                         SDL_Renderer* r);
+
+	virtual void handlePaddleCollide(class Paddle* paddle);
 
 };
 

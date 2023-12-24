@@ -59,15 +59,15 @@ Paddle::~Paddle() {
     m_tR = nullptr;
 };
 
-void Paddle::movePos(int maxW, int maxH) {
+void Paddle::move(int maxW, int maxH) {
     using namespace std::chrono_literals;
 
     int yVel{getYVel()};
 
     Vec2D vecMove{0, yVel};
 
-    if (vecMove.getY() + getPos()->getY() < 0) {
-        vecMove.setY(getPos()->getY() * -1);
+    if (vecMove.getY() + m_tL->getY() < 0) {
+        vecMove.setY(m_tL->getY() * -1);
     }
     if (vecMove.getY() + getPos()->getY() > maxH) {
         vecMove.setY((getPos()->getY() - maxH) * -1);
@@ -81,7 +81,7 @@ void Paddle::movePos(int maxW, int maxH) {
     Vec2D* newTR{new Vec2D{*m_tR + vecMove}};
 
     // TODO find a different way to set pace
-    std::this_thread::sleep_for(10ms);
+    std::this_thread::sleep_for(1ms);
 
     setPosNull();
     setPos(newBL);

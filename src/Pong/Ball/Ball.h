@@ -3,6 +3,7 @@
 
 #include "../../Engine/Entity/Entity.h"
 #include "../../Engine/Vec2D/Vec2D.h"
+#include "../Paddle/Paddle.h"
 
 class Ball : public Entity {
    private:
@@ -13,7 +14,7 @@ class Ball : public Entity {
     int m_velocity{0};
     // Direction is stored in degrees
     int m_direction{0};
-	bool m_isCollision{true};
+    bool m_isCollision{true};
 
     void setPosNull();
 
@@ -36,11 +37,11 @@ class Ball : public Entity {
 
     int getVel() { return m_velocity; };
 
-    void setVel(int vel) { m_velocity = vel; };
+    virtual void setVel(int vel) override { m_velocity = vel; };
 
     int getDirection() { return m_direction; };
 
-    void setDirection(int newDir) { m_direction = newDir; };
+    virtual void setDirection(int newDir) override { m_direction = newDir; };
 
     void render(int (*renderPtr)(SDL_Renderer* renderer, int x1, int y1, int x2,
                                  int y2),
@@ -48,12 +49,13 @@ class Ball : public Entity {
 
     void handleXCollide(int maxW);
 
-	void handleYCollide(int maxH);
+    void handleYCollide(int maxH);
 
-    void movePos(int maxW, int maxH);
+	virtual void handlePaddleCollide(class Paddle* paddle) override;
 
-	void handleVCollide(Vec2D* vec, int maxW, int maxH);
+    void movePos(int maxW, int maxH, class Paddle* paddle, class Paddle* cpuPaddle);
 
+    void handleVCollide(Vec2D* vec, int maxW, int maxH);
 };
 
 #endif
