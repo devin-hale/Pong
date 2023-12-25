@@ -1,7 +1,7 @@
 set(SOURCES main.cpp main.h)
 
 add_subdirectory(Engine)
-add_subdirectory(Pong)
+add_subdirectory(PongLib)
 add_executable (${PROJECT_NAME} ${SOURCES})
 
 target_link_libraries(${PROJECT_NAME} PUBLIC

@@ -6,9 +6,9 @@
 #include "Engine/Game/Game.h"
 #include "Engine/Renderer/Renderer.h"
 #include "Engine/Window/Window.h"
-#include "Pong/Ball/Ball.h"
-#include "Pong/Net/Net.h"
-#include "Pong/Paddle/Paddle.h"
+#include "PongLib/Ball/Ball.h"
+#include "PongLib/Net/Net.h"
+#include "PongLib/Paddle/Paddle.h"
 #include "version.h"
 
 int main(int argc, char* argv[]) {
