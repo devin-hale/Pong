@@ -18,15 +18,15 @@ Currently over-engineering an engine for a pong clone just to experiment and try
 - [x] Set up Game class to handle entities, loop through, etc
 
 ### Game:
-- [ ] Paddle Class
-    - [ ] Moving Up/Down
-    - [ ] Bounds Checking
-- [ ] Player Controls
-- [ ] Ball Class
+- [x] Paddle Class
+    - [x] Moving Up/Down
+    - [x] Bounds Checking
+- [x] Player Controls
+- [x] Ball Class
     - [x] Movement
     - [x] Velocity
-    - [ ] Redirection/Bouncing
-- [ ] Collision Checking
+    - [x] Redirection/Bouncing
+- [x] Collision Checking
 - [ ] Player Class
 - [ ] Simple AI for CPU player
 - [ ] Winchecking on Game Class

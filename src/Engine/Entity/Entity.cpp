@@ -39,7 +39,7 @@ void Entity::movePos(int x, int y) {
 void Entity::move(int maxW, int maxH){};
 void Entity::setDirection(int angle){};
 void Entity::setVel(int vel){};
-void Entity::handlePaddleCollide(class Paddle* paddle){};
+void Entity::handlePaddleCollide(class Paddle* paddle, int paddleType){};
 
 void Entity::render(int (*renderPtr)(SDL_Renderer* renderer, int sx, int sy,
                                      int ex, int ey),

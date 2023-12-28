@@ -36,7 +36,7 @@ int main(int argc, char* argv[]) {
 	game->addEntity(cpuPaddle);
     game->addEntity(ball);
 	game->addEntity(net);
-    ball->setDirection(45);
+    ball->setDirection(0);
 
     while (game->isRunning()) {
         SDL_Event event;

@@ -45,7 +45,7 @@ class Entity {
                                          int ex, int ey),
                         SDL_Renderer* r);
 
-	virtual void handlePaddleCollide(class Paddle* paddle);
+	virtual void handlePaddleCollide(class Paddle* paddle, int paddleType);
 
 };
 

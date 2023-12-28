@@ -51,7 +51,7 @@ class Ball : public Entity {
 
     void handleYCollide(int maxH);
 
-	virtual void handlePaddleCollide(class Paddle* paddle) override;
+	virtual void handlePaddleCollide(class Paddle* paddle, int paddleType) override;
 
     void movePos(int maxW, int maxH, class Paddle* paddle, class Paddle* cpuPaddle);
 

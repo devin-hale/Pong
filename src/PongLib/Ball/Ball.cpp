@@ -4,6 +4,7 @@
 
 #include <cmath>
 #include <iostream>
+#include <string_view>
 #include <thread>
 
 constexpr double pi = 3.14;
@@ -86,13 +87,14 @@ Ball::~Ball() {
     m_tR = nullptr;
 };
 
-void Ball::movePos(int maxW, int maxH, class Paddle* playerPaddle, class Paddle* cpuPaddle) {
+void Ball::movePos(int maxW, int maxH, class Paddle* playerPaddle,
+                   class Paddle* cpuPaddle) {
     using namespace std::chrono_literals;
 
     handleXCollide(maxW);
     handleYCollide(maxH);
-	//handlePaddleCollide(playerPaddle);
-	//handlePaddleCollide(cpuPaddle);
+    handlePaddleCollide(playerPaddle, 0);
+    handlePaddleCollide(cpuPaddle, 1);
 
     int xVel{getXVel()};
     int yVel{getYVel()};
@@ -144,48 +146,56 @@ void Ball::render(int (*renderPtr)(SDL_Renderer* renderer, int x1, int y1,
               getPos()->getY());
 };
 
-void Ball::handlePaddleCollide(class Paddle* paddle) {
+void Ball::handlePaddleCollide(class Paddle* paddle, int paddleType) {
     int x = getPos()->getX();
     int y = getPos()->getY();
     int xVel = getXVel();
     int yVel = getYVel();
 
-    bool xCollidePlayerPaddle = x <= paddle->getBR()->getX();
-    bool yCollidePlayerPaddle =
-        (y <= paddle->getBR()->getY() || y >= paddle->getTR()->getY()) &&
-        (m_tL->getY() <= paddle->getBR()->getY() ||
-         m_tL->getY() >= paddle->getTR()->getY());
-
-    bool xCollideCPUPaddle = m_bR->getX() >= paddle->getPos()->getX();
-    bool yCollideCPUPaddle = (m_bR->getY() <= paddle->getPos()->getY() ||
-                              y >= paddle->getTL()->getY()) &&
-                             (m_tR->getY() <= paddle->getTL()->getY() ||
-                              m_tR->getY() >= paddle->getTL()->getY());
-
-    if (xCollidePlayerPaddle && yCollidePlayerPaddle) {
-        if (yVel > 0) {
-            // Ball is moving downward, adjust the direction
-            m_direction = (m_direction + 270) % 360;
-        } else if (yVel < 0) {
-            // Ball is moving upward, adjust the direction
-            m_direction = (m_direction + 90) % 360;
-        } else {
-            // Ball is moving horizontally, reverse x direction
-            m_direction = (180 - m_direction) % 360;
+    switch (paddleType) {
+        case 0: {
+            bool xCollidePlayerPaddle =
+                x <= paddle->getBR()->getX() && x >= paddle->getPos()->getX();
+            bool yCollidePlayerPaddle =
+                (y <= paddle->getBR()->getY() &&
+                 y >= paddle->getTR()->getY()) ||
+                (m_tL->getY() <= paddle->getBR()->getY() &&
+                 m_tL->getY() >= paddle->getTR()->getY());
+            if (xCollidePlayerPaddle && yCollidePlayerPaddle) {
+                if (yVel > 0) {
+                    // Ball is moving downward, adjust the direction
+                    m_direction = (m_direction + 270) % 360;
+                } else if (yVel < 0) {
+                    // Ball is moving upward, adjust the direction
+                    m_direction = (m_direction + 90) % 360;
+                } else {
+                    // Ball is moving horizontally, reverse x direction
+                    m_direction = (180 - m_direction) % 360;
+                }
+            }
         }
+        case 1: {
+            bool xCollideCPUPaddle = m_bR->getX() >= paddle->getPos()->getX() && m_bR->getX() <= paddle->getBR()->getX();
+            bool yCollideCPUPaddle =
+                (m_bR->getY() <= paddle->getPos()->getY() &&
+                 m_bR->getY() >= paddle->getTL()->getY()) ||
+                (m_tR->getY() <= paddle->getPos()->getY() &&
+                 m_tR->getY() >= paddle->getTL()->getY());
 
-    } else if (xCollideCPUPaddle && yCollideCPUPaddle) {
-        if (yVel > 0) {
-            // Ball is moving downward, adjust the direction
-            m_direction = (m_direction + 90) % 360;
-        } else if (yVel < 0) {
-            // Ball is moving upward, adjust the direction
-            m_direction = (m_direction + 270) % 360;
-        } else {
-            // Ball is moving horizontally, reverse x direction
-            m_direction = (180 - m_direction) % 360;
+            if (xCollideCPUPaddle && yCollideCPUPaddle) {
+                if (yVel > 0) {
+                    // Ball is moving downward, adjust the direction
+                    m_direction = (m_direction + 90) % 360;
+                } else if (yVel < 0) {
+                    // Ball is moving upward, adjust the direction
+                    m_direction = (m_direction + 270) % 360;
+                } else {
+                    // Ball is moving horizontally, reverse x direction
+                    m_direction = (180 - m_direction) % 360;
+                }
+            };
         }
-    };
+    }
 };
 
 void Ball::handleXCollide(int maxW) {
