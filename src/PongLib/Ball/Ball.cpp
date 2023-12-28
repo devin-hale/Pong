@@ -172,10 +172,14 @@ void Ball::handlePaddleCollide(class Paddle* paddle, int paddleType) {
                     // Ball is moving horizontally, reverse x direction
                     m_direction = (180 - m_direction) % 360;
                 }
+                randomizeSpeed();
+                randomizeDirection();
             }
+            break;
         }
         case 1: {
-            bool xCollideCPUPaddle = m_bR->getX() >= paddle->getPos()->getX() && m_bR->getX() <= paddle->getBR()->getX();
+            bool xCollideCPUPaddle = m_bR->getX() >= paddle->getPos()->getX() &&
+                                     m_bR->getX() <= paddle->getBR()->getX();
             bool yCollideCPUPaddle =
                 (m_bR->getY() <= paddle->getPos()->getY() &&
                  m_bR->getY() >= paddle->getTL()->getY()) ||
@@ -193,7 +197,10 @@ void Ball::handlePaddleCollide(class Paddle* paddle, int paddleType) {
                     // Ball is moving horizontally, reverse x direction
                     m_direction = (180 - m_direction) % 360;
                 }
+                randomizeSpeed();
+                randomizeDirection();
             };
+            break;
         }
     }
 };
@@ -216,6 +223,8 @@ void Ball::handleXCollide(int maxW) {
             // Ball is moving horizontally, reverse x direction
             m_direction = (180 - m_direction) % 360;
         }
+        randomizeDirection();
+        randomizeSpeed();
     }
 
     // Check for right wall collision
@@ -230,12 +239,16 @@ void Ball::handleXCollide(int maxW) {
             // Ball is moving horizontally, reverse x direction
             m_direction = (180 - m_direction) % 360;
         }
+        randomizeDirection();
+        randomizeSpeed();
     }
 }
 
 void Ball::handleYCollide(int maxH) {
     if (getPos()->getY() <= 0 || m_bR->getY() >= maxH) {
         m_direction = m_direction * -1;
+        randomizeDirection();
+        randomizeSpeed();
     }
 };
 
@@ -252,4 +265,21 @@ void Ball::handleVCollide(Vec2D* vec, int maxW, int maxH) {
     if (vec->getY() > maxH) {
         vec->setY(maxH);
     }
+};
+
+void Ball::randomizeSpeed() {
+    double randomSpeed{Random::get(0.5, 1.5)};
+    m_velocity = static_cast<int>(m_velocity * randomSpeed);
+
+    if (m_velocity < 5) {
+        m_velocity = 5;
+    }
+    if (m_velocity > 10) {
+        m_velocity = 10;
+    };
+};
+
+void Ball::randomizeDirection() {
+    double randomMultiple{Random::get(0.8, 1.2)};
+    m_direction = static_cast<int>(m_direction * randomMultiple);
 };

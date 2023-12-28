@@ -13,7 +13,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE
 	${CMAKE_CURRENT_SOURCE_DIR}
 	${CMAKE_CURRENT_BINARY_DIR}
 	${PROJECT_SOURCE_DIR}/Engine
-	${PROJECT_SOURCE_DIR}/Pong
+	${PROJECT_SOURCE_DIR}/PongLib
 )
 
 configure_file(version.h.in

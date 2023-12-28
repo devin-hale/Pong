@@ -3,6 +3,7 @@
 
 #include "../../Engine/Entity/Entity.h"
 #include "../../Engine/Vec2D/Vec2D.h"
+#include "../../Engine/Random/Random.h"
 #include "../Paddle/Paddle.h"
 
 class Ball : public Entity {
@@ -56,6 +57,10 @@ class Ball : public Entity {
     void movePos(int maxW, int maxH, class Paddle* paddle, class Paddle* cpuPaddle);
 
     void handleVCollide(Vec2D* vec, int maxW, int maxH);
+
+	void randomizeSpeed();
+	
+	void randomizeDirection();
 };
 
 #endif
