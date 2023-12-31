@@ -34,7 +34,7 @@ Game::~Game() {
     for (Entity* ent : m_entities) {
         delete ent;
     };
-    TTF_CloseFont(m_currentFont);
+    TTF_CloseFont(m_gameFont);
     TTF_Quit();
 }
 
