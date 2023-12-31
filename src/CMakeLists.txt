@@ -22,3 +22,4 @@ configure_file(version.h.in
 target_sources(${PROJECT_NAME} PRIVATE
 	${CMAKE_CURRENT_BINARY_DIR}/version.h
 )
+
