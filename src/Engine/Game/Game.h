@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include <SDL.h>
+#include <SDL_ttf.h>
 
 #include <vector>
 
@@ -16,6 +17,7 @@ class Game {
     Renderer* m_renderer{nullptr};
     std::vector<Entity*> m_entities{};
     Entity* m_playerEntity{nullptr};
+	TTF_Font* m_gameFont{nullptr};
 
     void setIsRunning(bool boolean) { m_isRunning = boolean; };
 

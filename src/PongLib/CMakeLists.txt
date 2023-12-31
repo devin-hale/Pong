@@ -1,9 +1,9 @@
 find_package(SDL2 REQUIRED)
 find_package(SDL2_ttf REQUIRED)
 
-# Now SDL2_TTF_INCLUDE_DIR contains the path to the include directory
-message("SDL2_ttf include directory: ${_sdl2ttf_incdir}")
-message("SDL2 include directory: ${SDL2_INCLUDE_DIRS}")
+add_subdirectory(Ball)
+add_subdirectory(Net)
+add_subdirectory(Paddle)
 add_subdirectory(PlayerScore)
 
 add_library(PongLib INTERFACE)

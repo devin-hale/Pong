@@ -1,7 +1,7 @@
-set(GAME_SOURCES Game.cpp Game.h)
+set(GAME_SOURCES Game.cpp Game.h RobotoMono.ttf)
 
 add_library(Game ${GAME_SOURCES})
 
-target_include_directories(Game PRIVATE ${SDL2_INCLUDE_DIRS})
+target_include_directories(Game PRIVATE ${SDL2_INCLUDE_DIRS} ${_sdl2ttf_incdir})
 
 target_link_libraries(Game PRIVATE SDL2::SDL2 SDL2::SDL2main)

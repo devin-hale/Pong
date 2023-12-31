@@ -3,8 +3,11 @@
 #include <SDL_events.h>
 #include <SDL_keyboard.h>
 #include <SDL_scancode.h>
+#include <SDL_ttf.h>
 
 #include <iostream>
+
+#include "../Text/Text.h"
 
 // Private
 void Game::exitGame() {
@@ -15,7 +18,14 @@ void Game::exitGame() {
 // Public
 Game::Game(Window* window, Renderer* renderer)
     : m_window{window}, m_renderer{renderer} {
+    TTF_Init();
+    m_gameFont = TTF_OpenFont("RobotoMono.ttf", 20);
     setIsRunning(true);
+
+    //Vec2D vecPos{m_window->getWidth() / 3, 20};
+
+	//Text* classPtr{new Text{&vecPos, m_renderer, 20, 20, m_gameFont}};
+
 };
 
 Game::~Game() {
@@ -24,6 +34,8 @@ Game::~Game() {
     for (Entity* ent : m_entities) {
         delete ent;
     };
+    TTF_CloseFont(m_currentFont);
+    TTF_Quit();
 }
 
 void Game::gameLoop(SDL_Event& event) {
@@ -84,4 +96,3 @@ void Game::renderEntities() {
         };
     };
 };
-
