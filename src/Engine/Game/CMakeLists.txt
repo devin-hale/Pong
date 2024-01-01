@@ -1,4 +1,4 @@
-set(GAME_SOURCES Game.cpp Game.h RobotoMono.ttf)
+set(GAME_SOURCES Game.cpp Game.h)
 
 add_library(Game ${GAME_SOURCES})
 

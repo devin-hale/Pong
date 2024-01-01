@@ -6,6 +6,7 @@
 
 #include <vector>
 
+#include "../../PongLib/PlayerScore/PlayerScore.h"
 #include "../Entity/Entity.h"
 #include "../Renderer/Renderer.h"
 #include "../Window/Window.h"
@@ -17,7 +18,8 @@ class Game {
     Renderer* m_renderer{nullptr};
     std::vector<Entity*> m_entities{};
     Entity* m_playerEntity{nullptr};
-	TTF_Font* m_gameFont{nullptr};
+    TTF_Font* m_gameFont{nullptr};
+    std::vector<PlayerScore*> m_scores{};
 
     void setIsRunning(bool boolean) { m_isRunning = boolean; };
 
@@ -40,7 +42,9 @@ class Game {
 
     void renderEntities();
 
-	void checkCollision();
+	void renderScores();
+
+    void checkCollision();
 };
 
 #endif

@@ -1,6 +1,7 @@
 #include "Game.h"
 
 #include <SDL_events.h>
+#include <SDL_filesystem.h>
 #include <SDL_keyboard.h>
 #include <SDL_scancode.h>
 #include <SDL_ttf.h>
@@ -19,13 +20,16 @@ void Game::exitGame() {
 Game::Game(Window* window, Renderer* renderer)
     : m_window{window}, m_renderer{renderer} {
     TTF_Init();
-    m_gameFont = TTF_OpenFont("RobotoMono.ttf", 20);
+
+    std::string fontPath = SDL_GetBasePath();
+    fontPath += "RobotoMono.ttf";
+    std::cout << fontPath << "\n";
+    m_gameFont = TTF_OpenFont(fontPath.c_str(), 40);
     setIsRunning(true);
 
-    //Vec2D vecPos{m_window->getWidth() / 3, 20};
-
-	//Text* classPtr{new Text{&vecPos, m_renderer, 20, 20, m_gameFont}};
-
+    m_scores.push_back(new PlayerScore{
+        1, new Text{new Vec2D{m_window->getWidth() / 4, 20},
+                    m_renderer->getRenderer(), 20, 20, m_gameFont}});
 };
 
 Game::~Game() {
@@ -96,3 +100,9 @@ void Game::renderEntities() {
         };
     };
 };
+
+void Game::renderScores() {
+    for (PlayerScore* score : m_scores) {
+        score->Render();
+    };
+}

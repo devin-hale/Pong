@@ -16,15 +16,15 @@ class Text {
     SDL_Renderer* m_renderer{nullptr};
     SDL_Surface* m_surface{nullptr};
     SDL_Texture* m_texture{nullptr};
-    SDL_Rect* m_rect{new SDL_Rect{}};
+    SDL_Rect* m_rect{new SDL_Rect()};
 
    public:
-	Text() = delete;
+	Text();
     Text(Vec2D* position, SDL_Renderer* renderer, int width, int height,
          TTF_Font* font);
 
     ~Text();
-
+	
     void Draw();
 
     void RenderText(int num);

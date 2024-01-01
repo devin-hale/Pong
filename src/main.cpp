@@ -47,6 +47,7 @@ int main(int argc, char* argv[]) {
 
         renderer->renderBackGround();
         game->renderEntities();
+		game->renderScores();
         renderer->render();
     }
 
