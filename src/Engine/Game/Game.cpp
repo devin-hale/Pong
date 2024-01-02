@@ -30,6 +30,9 @@ Game::Game(Window* window, Renderer* renderer)
     m_scores.push_back(new PlayerScore{
         1, new Text{new Vec2D{m_window->getWidth() / 4, 20},
                     m_renderer->getRenderer(), 20, 20, m_gameFont}});
+    m_scores.push_back(new PlayerScore{
+        2, new Text{new Vec2D{(m_window->getWidth() / 4) * 3, 20},
+                    m_renderer->getRenderer(), 20, 20, m_gameFont}});
 };
 
 Game::~Game() {
@@ -106,3 +109,11 @@ void Game::renderScores() {
         score->Render();
     };
 }
+
+void Game::updateScores(int playerNo) {
+    for (PlayerScore* score : m_scores) {
+        if (score->getPlayerNo() == playerNo) {
+            score->incrementScore();
+        };
+    };
+};

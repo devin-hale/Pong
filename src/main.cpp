@@ -43,7 +43,7 @@ int main(int argc, char* argv[]) {
         SDL_Event event;
         game->gameLoop(event);
 
-        ball->movePos(window->getWidth(), window->getHeight(), playerPaddle, cpuPaddle);
+        ball->movePos(window->getWidth(), window->getHeight(), playerPaddle, cpuPaddle, *game);
 
         renderer->renderBackGround();
         game->renderEntities();

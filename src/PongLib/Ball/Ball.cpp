@@ -88,10 +88,10 @@ Ball::~Ball() {
 };
 
 void Ball::movePos(int maxW, int maxH, class Paddle* playerPaddle,
-                   class Paddle* cpuPaddle) {
+                   class Paddle* cpuPaddle, Game& game) {
     using namespace std::chrono_literals;
 
-    handleXCollide(maxW);
+    handleXCollide(maxW, game);
     handleYCollide(maxH);
     handlePaddleCollide(playerPaddle, 0);
     handlePaddleCollide(cpuPaddle, 1);
@@ -205,7 +205,7 @@ void Ball::handlePaddleCollide(class Paddle* paddle, int paddleType) {
     }
 };
 
-void Ball::handleXCollide(int maxW) {
+void Ball::handleXCollide(int maxW, Game& game) {
     int x = getPos()->getX();
     int y = getPos()->getY();
     int xVel = getXVel();
@@ -223,8 +223,7 @@ void Ball::handleXCollide(int maxW) {
             // Ball is moving horizontally, reverse x direction
             m_direction = (180 - m_direction) % 360;
         }
-        randomizeDirection();
-        randomizeSpeed();
+        game.updateScores(2);
     }
 
     // Check for right wall collision
@@ -239,8 +238,7 @@ void Ball::handleXCollide(int maxW) {
             // Ball is moving horizontally, reverse x direction
             m_direction = (180 - m_direction) % 360;
         }
-        randomizeDirection();
-        randomizeSpeed();
+        game.updateScores(1);
     }
 }
 

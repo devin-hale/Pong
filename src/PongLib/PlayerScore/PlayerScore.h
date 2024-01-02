@@ -14,6 +14,8 @@ class PlayerScore {
 
     PlayerScore(int playerNo, Text* text);
 
+	int getPlayerNo(){return m_playerNo;};
+
     void setScore(int score);
 
 	void incrementScore();

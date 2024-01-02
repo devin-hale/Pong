@@ -1,6 +1,8 @@
 #ifndef BALL_H
 #define BALL_H
 
+#include <SDL_ttf.h>
+#include "../../Engine/Game/Game.h"
 #include "../../Engine/Entity/Entity.h"
 #include "../../Engine/Vec2D/Vec2D.h"
 #include "../../Engine/Random/Random.h"
@@ -48,13 +50,13 @@ class Ball : public Entity {
                                  int y2),
                 SDL_Renderer* r) override;
 
-    void handleXCollide(int maxW);
+    void handleXCollide(int maxW, Game& game);
 
     void handleYCollide(int maxH);
 
 	virtual void handlePaddleCollide(class Paddle* paddle, int paddleType) override;
 
-    void movePos(int maxW, int maxH, class Paddle* paddle, class Paddle* cpuPaddle);
+    void movePos(int maxW, int maxH, class Paddle* paddle, class Paddle* cpuPaddle, Game& game);
 
     void handleVCollide(Vec2D* vec, int maxW, int maxH);
 

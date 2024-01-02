@@ -42,7 +42,9 @@ class Game {
 
     void renderEntities();
 
-	void renderScores();
+    void renderScores();
+
+    void updateScores(int playerNo);
 
     void checkCollision();
 };
