@@ -22,7 +22,7 @@ Game::Game(Window* window, Renderer* renderer)
     TTF_Init();
 
     std::string fontPath = SDL_GetBasePath();
-    fontPath += "RobotoMono.ttf";
+    fontPath += "../../assets/fonts/RobotoMono.ttf";
     std::cout << fontPath << "\n";
     m_gameFont = TTF_OpenFont(fontPath.c_str(), 40);
     setIsRunning(true);
