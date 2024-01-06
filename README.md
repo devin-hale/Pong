@@ -27,9 +27,8 @@ Currently over-engineering an engine for a pong clone just to experiment and try
     - [x] Velocity
     - [x] Redirection/Bouncing
 - [x] Collision Checking
-- [ ] Player Class
 - [ ] Simple AI for CPU player
-- [ ] Winchecking on Game Class
+- [ ] Winchecking
 - [ ] Win Screen
 - [ ] Play Again
 - [ ] Start Screen

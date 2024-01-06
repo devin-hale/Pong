@@ -3,8 +3,6 @@
 #include <math.h>
 
 #include <cmath>
-#include <iostream>
-#include <string_view>
 #include <thread>
 
 constexpr double pi = 3.14;
@@ -224,10 +222,11 @@ void Ball::handleXCollide(int maxW, Game& game) {
             m_direction = (180 - m_direction) % 360;
         }
         game.updateScores(2);
+
     }
 
     // Check for right wall collision
-    if (x >= maxW && xVel > 0) {
+    else if (x >= maxW && xVel > 0) {
         if (yVel > 0) {
             // Ball is moving downward, adjust the direction
             m_direction = (m_direction + 90) % 360;
@@ -243,8 +242,8 @@ void Ball::handleXCollide(int maxW, Game& game) {
 }
 
 void Ball::handleYCollide(int maxH) {
-    if (getPos()->getY() <= 0 || m_bR->getY() >= maxH) {
-        m_direction = m_direction * -1;
+    if (m_tL->getY() <= 0 || m_bR->getY() >= maxH) {
+        m_direction = 360 - m_direction;
         randomizeDirection();
         randomizeSpeed();
     }
@@ -266,18 +265,36 @@ void Ball::handleVCollide(Vec2D* vec, int maxW, int maxH) {
 };
 
 void Ball::randomizeSpeed() {
-    double randomSpeed{Random::get(0.5, 1.5)};
+    double randomSpeed{Random::get(0.75, 1.25)};
     m_velocity = static_cast<int>(m_velocity * randomSpeed);
 
-    if (m_velocity < 5) {
-        m_velocity = 5;
+    if (m_velocity < 6) {
+        m_velocity = 6;
     }
-    if (m_velocity > 10) {
-        m_velocity = 10;
+    if (m_velocity > 11) {
+        m_velocity = 11;
     };
 };
 
 void Ball::randomizeDirection() {
-    double randomMultiple{Random::get(0.8, 1.2)};
-    m_direction = static_cast<int>(m_direction * randomMultiple);
+    double randomMultiple{Random::get(0.9, 1.2)};
+    int newDirection{static_cast<int>(m_direction * randomMultiple)};
+    bool ballGoingRight{m_direction <= 90 || m_direction >= 270};
+    bool newDirectionRight{newDirection <= 270 || newDirection >= 90};
+
+    // If Ball is going one direction on the x axis, and the randomizer pushes
+    // it in the opposite direction, snap back to the bounds
+    if (ballGoingRight) {
+        if (newDirectionRight) {
+            m_direction = newDirection;
+        } else {
+            m_direction = newDirection < 180 ? 45 : 315;
+        }
+    } else {
+        if (!newDirectionRight) {
+            m_direction = newDirection;
+        } else {
+            m_direction = newDirection < 180 ? 135 : 225;
+        }
+    }
 };

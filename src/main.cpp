@@ -36,7 +36,7 @@ int main(int argc, char* argv[]) {
 	game->addEntity(cpuPaddle);
     game->addEntity(ball);
 	game->addEntity(net);
-    ball->setDirection(0);
+    ball->setDirection(1);
 	ball->setVel(5);
 
     while (game->isRunning()) {

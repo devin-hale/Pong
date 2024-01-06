@@ -6,8 +6,6 @@
 #include <SDL_scancode.h>
 #include <SDL_ttf.h>
 
-#include <iostream>
-
 #include "../Text/Text.h"
 
 // Private
@@ -23,7 +21,6 @@ Game::Game(Window* window, Renderer* renderer)
 
     std::string fontPath = SDL_GetBasePath();
     fontPath += "../../assets/fonts/RobotoMono.ttf";
-    std::cout << fontPath << "\n";
     m_gameFont = TTF_OpenFont(fontPath.c_str(), 40);
     setIsRunning(true);
 
