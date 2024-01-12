@@ -2,7 +2,7 @@
 
 ![Pong Image](repoAssets/repoImage.png)
 
-This is a practice project using SDL2 to implement Pong, and practice using CMake.  It was my C++ project, and it is horrendously overengineered.  I wanted to get comfortable with pointers so I used them for *everything*.  I also knew nothing about how to architect a game engine, and by the time I figured out what I *should* have done, I had already cooked up some fresh Italian pasta.
+This is a practice project using SDL2 to implement Pong, and practice using CMake as a build system.  It was my first C++ project, and it is horrendously overengineered.  I wanted to get comfortable with pointers so I used them for *everything*.  I also knew nothing about how to architect a game engine, and by the time I figured out what I *should* have done, I had already cooked up some fresh Italian pasta.
 
 ## Dependencies
 
