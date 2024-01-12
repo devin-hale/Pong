@@ -47,6 +47,8 @@ class Entity {
 
 	virtual void handlePaddleCollide(class Paddle* paddle, int paddleType);
 
+	virtual void resetPos();
+
 };
 
 #endif

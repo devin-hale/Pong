@@ -89,44 +89,52 @@ void Ball::movePos(int maxW, int maxH, class Paddle* playerPaddle,
                    class Paddle* cpuPaddle, Game& game) {
     using namespace std::chrono_literals;
 
-    handleXCollide(maxW, game);
-    handleYCollide(maxH);
-    handlePaddleCollide(playerPaddle, 0);
-    handlePaddleCollide(cpuPaddle, 1);
+    int didScore{handleXCollide(maxW, game)};
 
-    int xVel{getXVel()};
-    int yVel{getYVel()};
+    if (didScore == 0) {
+        handleYCollide(maxH);
+        handlePaddleCollide(playerPaddle, 0);
+        handlePaddleCollide(cpuPaddle, 1);
 
-    Vec2D vecMove{xVel, yVel};
+        int xVel{getXVel()};
+        int yVel{getYVel()};
 
-    if (vecMove.getX() + getPos()->getX() < 0) {
-        vecMove.setX(getPos()->getX() * -1);
+        Vec2D vecMove{xVel, yVel};
+
+        if (vecMove.getX() + getPos()->getX() < 0) {
+            vecMove.setX(getPos()->getX() * -1);
+        }
+        if (vecMove.getX() + getPos()->getX() > maxW) {
+            vecMove.setX((getPos()->getX() - maxW) * -1);
+        }
+        if (vecMove.getY() + getPos()->getY() < 0) {
+            vecMove.setY(getPos()->getY() * -1);
+        }
+        if (vecMove.getY() + getPos()->getY() > maxH) {
+            vecMove.setY((getPos()->getY() - maxH) * -1);
+        }
+
+        Vec2D* newBL{new Vec2D{*getPos() + vecMove}};
+
+        Vec2D* newBR{new Vec2D{*m_bR + vecMove}};
+
+        Vec2D* newTL{new Vec2D{*m_tL + vecMove}};
+        Vec2D* newTR{new Vec2D{*m_tR + vecMove}};
+
+        // TODO find a different way to set pace
+        std::this_thread::sleep_for(10ms);
+
+        setPosNull();
+        setPos(newBL);
+        m_bR = newBR;
+        m_tL = newTL;
+        m_tR = newTR;
+    } else {
+		game.updateScores(didScore);
+        game.advanceRound();
+		m_direction = 0;
+		m_velocity = 7;
     }
-    if (vecMove.getX() + getPos()->getX() > maxW) {
-        vecMove.setX((getPos()->getX() - maxW) * -1);
-    }
-    if (vecMove.getY() + getPos()->getY() < 0) {
-        vecMove.setY(getPos()->getY() * -1);
-    }
-    if (vecMove.getY() + getPos()->getY() > maxH) {
-        vecMove.setY((getPos()->getY() - maxH) * -1);
-    }
-
-    Vec2D* newBL{new Vec2D{*getPos() + vecMove}};
-
-    Vec2D* newBR{new Vec2D{*m_bR + vecMove}};
-
-    Vec2D* newTL{new Vec2D{*m_tL + vecMove}};
-    Vec2D* newTR{new Vec2D{*m_tR + vecMove}};
-
-    // TODO find a different way to set pace
-    std::this_thread::sleep_for(10ms);
-
-    setPosNull();
-    setPos(newBL);
-    m_bR = newBR;
-    m_tL = newTL;
-    m_tR = newTR;
 };
 
 void Ball::render(int (*renderPtr)(SDL_Renderer* renderer, int x1, int y1,
@@ -203,7 +211,7 @@ void Ball::handlePaddleCollide(class Paddle* paddle, int paddleType) {
     }
 };
 
-void Ball::handleXCollide(int maxW, Game& game) {
+int Ball::handleXCollide(int maxW, Game& game) {
     int x = getPos()->getX();
     int y = getPos()->getY();
     int xVel = getXVel();
@@ -211,34 +219,15 @@ void Ball::handleXCollide(int maxW, Game& game) {
 
     // Check for left wall collision
     if (x <= 0 && xVel < 0) {
-        if (yVel > 0) {
-            // Ball is moving downward, adjust the direction
-            m_direction = (m_direction + 270) % 360;
-        } else if (yVel < 0) {
-            // Ball is moving upward, adjust the direction
-            m_direction = (m_direction + 90) % 360;
-        } else {
-            // Ball is moving horizontally, reverse x direction
-            m_direction = (180 - m_direction) % 360;
-        }
-        game.updateScores(2);
-
+        return 2;
     }
 
     // Check for right wall collision
     else if (x >= maxW && xVel > 0) {
-        if (yVel > 0) {
-            // Ball is moving downward, adjust the direction
-            m_direction = (m_direction + 90) % 360;
-        } else if (yVel < 0) {
-            // Ball is moving upward, adjust the direction
-            m_direction = (m_direction + 270) % 360;
-        } else {
-            // Ball is moving horizontally, reverse x direction
-            m_direction = (180 - m_direction) % 360;
-        }
-        game.updateScores(1);
+        return 1;
     }
+
+    return 0;
 }
 
 void Ball::handleYCollide(int maxH) {
@@ -298,3 +287,18 @@ void Ball::randomizeDirection() {
         }
     }
 };
+
+void Ball::resetPos() {
+    int width = 25;
+    int height = 25;
+    int windowWidth{1280};
+    int windowHeight{720};
+    getPos()->setY(windowHeight / 2);
+    getPos()->setX(windowWidth / 2);
+    delete m_bR;
+    delete m_tL;
+    delete m_tR;
+    m_bR = new Vec2D{getPos()->getX() + width, getPos()->getY()};
+    m_tL = new Vec2D{getPos()->getX(), getPos()->getY() - height};
+    m_tR = new Vec2D{getPos()->getX() + width, getPos()->getY() - height};
+}

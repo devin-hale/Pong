@@ -50,7 +50,7 @@ class Ball : public Entity {
                                  int y2),
                 SDL_Renderer* r) override;
 
-    void handleXCollide(int maxW, Game& game);
+    int handleXCollide(int maxW, Game& game);
 
     void handleYCollide(int maxH);
 
@@ -63,6 +63,8 @@ class Ball : public Entity {
 	void randomizeSpeed();
 	
 	void randomizeDirection();
+
+	virtual void resetPos() override;
 };
 
 #endif

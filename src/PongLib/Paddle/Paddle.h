@@ -44,6 +44,8 @@ class Paddle : public Entity {
                 SDL_Renderer* r) override;
 
     void move(int maxW, int maxH) override;
+
+	virtual void resetPos() override;
 };
 
 #endif

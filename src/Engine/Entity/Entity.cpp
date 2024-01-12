@@ -44,3 +44,5 @@ void Entity::handlePaddleCollide(class Paddle* paddle, int paddleType){};
 void Entity::render(int (*renderPtr)(SDL_Renderer* renderer, int sx, int sy,
                                      int ex, int ey),
                     SDL_Renderer* r){};
+
+void Entity::resetPos(){};

@@ -46,6 +46,8 @@ class Game {
 
     void updateScores(int playerNo);
 
+	void advanceRound();
+
     void checkCollision();
 };
 

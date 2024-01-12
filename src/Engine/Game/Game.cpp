@@ -101,6 +101,19 @@ void Game::renderEntities() {
     };
 };
 
+void Game::advanceRound() {
+	for (Entity* ent : m_entities) {
+		switch(ent->getType()) {
+			case Entity::EntityType::Ball:
+			case Entity::EntityType::Paddle:
+				ent->resetPos();
+				break;
+			default:
+				break;
+		}
+	}
+};
+
 void Game::renderScores() {
     for (PlayerScore* score : m_scores) {
         score->Render();
@@ -114,3 +127,5 @@ void Game::updateScores(int playerNo) {
         };
     };
 };
+
+

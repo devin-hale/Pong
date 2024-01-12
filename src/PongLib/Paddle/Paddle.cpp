@@ -104,3 +104,16 @@ void Paddle::render(int (*renderPtr)(SDL_Renderer* renderer, int x1, int y1,
     renderPtr(r, m_tL->getX(), m_tL->getY(), getPos()->getX(),
               getPos()->getY());
 };
+
+void Paddle::resetPos(){
+	getPos()->setX(m_isPlayer ? 20 : 1280 - 40);
+	getPos()->setY(720/2 + 60);
+
+	delete m_bR;
+    m_bR = new Vec2D{getPos()->getX() + 20, getPos()->getY()};
+	delete m_tL;
+    m_tL = new Vec2D{getPos()->getX(), getPos()->getY() - 120};
+	delete m_tR;
+    m_tR = new Vec2D{getPos()->getX() + 20, getPos()->getY() - 120};
+
+};
