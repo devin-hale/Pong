@@ -1,4 +1,4 @@
-# CPP Pong v0.1
+# CPP Pong
 
 ![Pong Image](repoAssets/repoImage.png)
 
