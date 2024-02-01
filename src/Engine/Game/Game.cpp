@@ -3,6 +3,7 @@
 #include <SDL_events.h>
 #include <SDL_filesystem.h>
 #include <SDL_keyboard.h>
+#include <SDL_keycode.h>
 #include <SDL_scancode.h>
 #include <SDL_ttf.h>
 
@@ -57,6 +58,18 @@ void Game::gameLoop(SDL_Event& event) {
         m_playerEntity->move(m_window->getWidth(), m_window->getHeight());
     };
 
+    if (currentKeyStates[SDL_SCANCODE_UP]) {
+        m_cpuEntity->setVel(15);
+        m_cpuEntity->setDirection(-90);
+        m_cpuEntity->move(m_window->getWidth(), m_window->getHeight());
+    };
+
+    if (currentKeyStates[SDL_SCANCODE_DOWN]) {
+        m_cpuEntity->setVel(15);
+        m_cpuEntity->setDirection(90);
+        m_cpuEntity->move(m_window->getWidth(), m_window->getHeight());
+    };
+
     while (SDL_PollEvent(&event)) {
         switch (event.type) {
             case SDL_QUIT:
@@ -77,6 +90,10 @@ void Game::gameLoop(SDL_Event& event) {
                     case SDLK_s:
                         m_playerEntity->setVel(0);
                         break;
+					case SDLK_UP:
+                    case SDLK_DOWN:
+                        m_cpuEntity->setVel(0);
+						break;
                 }
             }
         }
@@ -102,16 +119,16 @@ void Game::renderEntities() {
 };
 
 void Game::advanceRound() {
-	for (Entity* ent : m_entities) {
-		switch(ent->getType()) {
-			case Entity::EntityType::Ball:
-			case Entity::EntityType::Paddle:
-				ent->resetPos();
-				break;
-			default:
-				break;
-		}
-	}
+    for (Entity* ent : m_entities) {
+        switch (ent->getType()) {
+            case Entity::EntityType::Ball:
+            case Entity::EntityType::Paddle:
+                ent->resetPos();
+                break;
+            default:
+                break;
+        }
+    }
 };
 
 void Game::renderScores() {
@@ -127,5 +144,3 @@ void Game::updateScores(int playerNo) {
         };
     };
 };
-
-

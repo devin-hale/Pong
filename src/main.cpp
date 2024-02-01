@@ -32,6 +32,7 @@ int main(int argc, char* argv[]) {
 	Paddle* cpuPaddle{new Paddle{false, window->getWidth(), window->getHeight()}};
 
 	game->addPlayerEntity(playerPaddle);
+	game->addCpuEntity(cpuPaddle);
 	game->addEntity(playerPaddle);
 	game->addEntity(cpuPaddle);
     game->addEntity(ball);

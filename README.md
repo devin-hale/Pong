@@ -28,3 +28,7 @@ This is a practice project using SDL2 to implement Pong, and practice using CMak
     ```cmake -B /out/build -S```
 
 - Run Pong.exe
+
+## How To Play
+- The Left paddle is controlled by W(up) and S(down) keys.
+- The Right paddle is controlled by Up arrow and Down arrow keys.
